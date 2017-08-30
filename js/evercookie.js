@@ -245,11 +245,11 @@ try{
     phpuri: '/php', // php file path or route
     authPath: false, //'/evercookie_auth.php', // set to false to disable Basic Authentication cache
     pngCookieName: 'evercookie_png',
-    pngPath: '/evercookie_png.php',
+    pngPath: '/png.php',
     etagCookieName: 'evercookie_etag',
-    etagPath: '/evercookie_etag.php',
+    etagPath: '/etag.php',
     cacheCookieName: 'evercookie_cache',
-    cachePath: '/evercookie_cache.php',
+    cachePath: '/cache.php',
     hsts: false,
     hsts_domains: [],
     db: true, // Database
