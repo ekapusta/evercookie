@@ -8,11 +8,17 @@
  */
 
 // we get cookie name from current file name so remember about it when rename of this file will be required 
-include dirname(__FILE__) . DIRECTORY_SEPARATOR . '_cookie_name.php';
+include dirname(__FILE__).DIRECTORY_SEPARATOR.'_cookie_name.php';
 $cookie_name = evercookie_get_cookie_name(__FILE__);
 
+$cookieWhiteList = [
+    'evercookie_png',
+    'evercookie_etag',
+    'evercookie_cache',
+];
+
 // we don't have a cookie, user probably deleted it, force cache
-if (empty($_COOKIE[$cookie_name])) {
+if (empty($_COOKIE[$cookie_name]) || !in_array($cookie_name, $cookieWhiteList, true)) {
     header('HTTP/1.1 304 Not Modified');
     exit;
 }
