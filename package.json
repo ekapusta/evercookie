@@ -1,0 +1,12 @@
+{
+  "name": "evercookie",
+  "version": "0.0.1",
+  "description": "Evercookie plugin",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "repository": "git@github.com:ekapusta/evercookie.git",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 8"
+  }
+}

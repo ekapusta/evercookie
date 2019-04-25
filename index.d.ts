@@ -1,0 +1,31 @@
+export class Evercookie {
+    ajax(settings): any;
+    createElem(type, name, append): any;
+    createIframe(url, name): any;
+    decode(input): any;
+    encode(input): any;
+    evercookie_auth(name, value): any;
+    evercookie_cache(name, value): any;
+    evercookie_cookie(name, value): any;
+    evercookie_database_storage(name, value): any;
+    evercookie_etag(name, value): any;
+    evercookie_global_storage(name, value): any;
+    evercookie_history(name, value): any;
+    evercookie_indexdb_storage(name, value): any;
+    evercookie_java(name, value): any;
+    evercookie_local_storage(name, value): any;
+    evercookie_lso(name, value): any;
+    evercookie_png(name, value): any;
+    evercookie_session_storage(name, value): any;
+    evercookie_silverlight(name, value): any;
+    evercookie_userdata(name, value): any;
+    evercookie_window(name, value): any;
+    fromHex(str): any;
+    get(name, cb, dont_reset): any;
+    getFromStr(name, text): any;
+    getHost(): any;
+    hasVisited(url): any;
+    set(name, value): any;
+    toHex(str): any;
+    waitForSwf(i): any;
+}

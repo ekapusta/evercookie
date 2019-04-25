@@ -1,0 +1,1 @@
+// Note: Perhaps an adapter will be added later. Currently, there are only types for the correct operation of npm or yarn package managers.
