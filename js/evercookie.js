@@ -700,23 +700,26 @@ try{
             ctx.drawImage(img, 0, 0);
 
             // get CanvasPixelArray from  given coordinates and dimensions
-            var imgd = ctx.getImageData(0, 0, 200, 1),
-              pix = imgd.data, i, n;
+            var imgd = ctx.getImageData(0, 0, 200, 1);
+            var pix = imgd ? imgd.data : [];
+            var i, n;
 
-            // loop over each pixel to get the "RGB" values (ignore alpha)
-            for (i = 0, n = pix.length; i < n; i += 4) {
-              if (pix[i] === 0) {
-                break;
+            if(!pix) {
+              // loop over each pixel to get the "RGB" values (ignore alpha)
+              for (i = 0, n = pix.length; i < n; i += 4) {
+                if (pix[i] === 0) {
+                  break;
+                }
+                self._ec.pngData += String.fromCharCode(pix[i]);
+                if (pix[i + 1] === 0) {
+                  break;
+                }
+                self._ec.pngData += String.fromCharCode(pix[i + 1]);
+                if (pix[i + 2] === 0) {
+                  break;
+                }
+                self._ec.pngData += String.fromCharCode(pix[i + 2]);
               }
-              self._ec.pngData += String.fromCharCode(pix[i]);
-              if (pix[i + 1] === 0) {
-                break;
-              }
-              self._ec.pngData += String.fromCharCode(pix[i + 1]);
-              if (pix[i + 2] === 0) {
-                break;
-              }
-              self._ec.pngData += String.fromCharCode(pix[i + 2]);
             }
           };
         }
