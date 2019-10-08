@@ -810,20 +810,21 @@ try {
                         //FF incognito mode restricts indexedb access
                         var request = indexedDB.open("idb_evercookie", ver);
 
-
-                        request.onerror = function (e) {
-                            ;
-                        }
+                        request.onerror = function (e) {};
 
                         request.onupgradeneeded = function (event) {
-                            var db = event.target.result;
+                            /**
+                             * @see https://developer.mozilla.org/en-US/docs/Web/API/IDBOpenDBRequest/onupgradeneeded
+                             */
+                            var db = request.result || event.target.result;
+
 
                             var store = db.createObjectStore("evercookie", {
                                 keyPath: "name",
                                 unique: false
                             })
 
-                        }
+                        };
 
                         if (value !== undefined) {
 
