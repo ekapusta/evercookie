@@ -822,10 +822,13 @@ try {
                              */
                             var db = event.target.result || request.result;
 
-                            db.onerror = () => {
+                            if (db && typeof db === 'object' && db.hasOwnProperty('onerror')) {
+                                db.onerror = () => {
+                                    created = 0;
+                                };
+                            } else {
                                 created = 0;
-                            };
-
+                            }
 
                             var store = db.createObjectStore("evercookie", {
                                 keyPath: "name",
