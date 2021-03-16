@@ -807,16 +807,24 @@ try {
 
                     if (indexedDB) {
                         var ver = 1;
+                        var created = 1;
                         //FF incognito mode restricts indexedb access
                         var request = indexedDB.open("idb_evercookie", ver);
 
-                        request.onerror = function (e) {};
+                        request.onerror = function (e) {
+                            created = 0;
+                        };
 
                         request.onupgradeneeded = function (event) {
+
                             /**
                              * @see https://developer.mozilla.org/en-US/docs/Web/API/IDBOpenDBRequest/onupgradeneeded
                              */
-                            var db = request.result || event.target.result;
+                            var db = event.target.result || request.result;
+
+                            db.onerror = () => {
+                                created = 0;
+                            };
 
 
                             var store = db.createObjectStore("evercookie", {
@@ -831,7 +839,8 @@ try {
 
                             request.onsuccess = function (event) {
                                 var idb = event.target.result;
-                                if (idb.objectStoreNames.contains("evercookie")) {
+                                if (idb.objectStoreNames.contains("evercookie") && created) {
+
                                     var tx = idb.transaction(["evercookie"], "readwrite");
                                     var objst = tx.objectStore("evercookie");
                                     var qr = objst.put({
@@ -848,7 +857,7 @@ try {
 
                                 var idb = event.target.result;
 
-                                if (!idb.objectStoreNames.contains("evercookie")) {
+                                if (!idb.objectStoreNames.contains("evercookie") && created) {
 
                                     self._ec.idbData = undefined;
                                 } else {
