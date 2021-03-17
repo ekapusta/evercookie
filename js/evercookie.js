@@ -826,30 +826,29 @@ try {
                                 db.onerror = () => {
                                     created = 0;
                                 };
+                                var store = db.createObjectStore("evercookie", {
+                                    keyPath: "name",
+                                    unique: false
+                                })
                             } else {
                                 created = 0;
                             }
-
-                            var store = db.createObjectStore("evercookie", {
-                                keyPath: "name",
-                                unique: false
-                            })
-
                         };
 
                         if (value !== undefined) {
 
-
                             request.onsuccess = function (event) {
                                 var idb = event.target.result;
                                 if (idb.objectStoreNames.contains("evercookie") && created) {
-
-                                    var tx = idb.transaction(["evercookie"], "readwrite");
-                                    var objst = tx.objectStore("evercookie");
-                                    var qr = objst.put({
-                                        "name": name,
-                                        "value": value
-                                    })
+                                    try {
+                                        var tx = idb.transaction(["evercookie"], "readwrite");
+                                        var objst = tx.objectStore("evercookie");
+                                        var qr = objst.put({
+                                            "name": name,
+                                            "value": value
+                                        });
+                                    } catch (e) {
+                                    }
                                 }
                                 idb.close();
                             }
